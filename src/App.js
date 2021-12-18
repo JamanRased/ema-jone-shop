@@ -15,7 +15,7 @@ function App() {
   return (
     <div>
       <Router>
-      <Header></Header>
+        <Header></Header>
       <Switch>
           <Route exact path="/">
             <Shop></Shop>
