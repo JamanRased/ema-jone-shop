@@ -9,7 +9,8 @@ const useProducts = (products)=>{
             const savedCart = getStoredCart();
             const storeCart = [];
             for (const key in savedCart){
-                const addedProduct = products.find(product =>product.key == key);
+                const addedProduct = products.find(product =>product.key === key);
+                    //set Quanttity
                     if (addedProduct){
                         const quqntity = savedCart[key];
                         addedProduct.quqntity = quqntity;

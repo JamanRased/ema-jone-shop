@@ -21,13 +21,13 @@ const Product = (props) => {
                 <Rating
                     initialRating={star}
                     emptySymbol="far fa-star icon-color"
-                    fullSymbol="fas fa-star icon-color"
+                    fullSymbol="fas fa-star icon-color"  
                     readonly></Rating>
                 <br />
                 <button
                     onClick={() => props.handleAddToCart(props.product)}
                     className="btn-regular"
-                ><FontAwesomeIcon icon={faShoppingCart} /> add to cart</button>
+                ><FontAwesomeIcon icon={faShoppingCart} /> Add to Cart</button>
             </div>
         </div>
     );
