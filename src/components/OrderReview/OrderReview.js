@@ -17,7 +17,7 @@ const OrderReview = () => {
         removeFromDb(key);
     }
     const handlePlaceOrder = ()=>{
-        history.push('./placeorder');
+        history.push('./shipping');
         //setCart([]);
         clearTheCart();
     }
