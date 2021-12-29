@@ -4,19 +4,21 @@ import Shop from './components/Shop/Shop';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import OrderReview from './components/OrderReview/OrderReview';
 import Inventory from './components/Inventory/Inventory';
 import NotFound from './components/NotFound/NotFound';
 import PlaceOrder from './components/PlaceOrder/PlaceOrder';
 import Login from './components/Login/Login';
+import AuthProvider from './components/context/AuthProvider';
 import Register from './components/Register/Register';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 function App() {
   return (
     <div>
+      <AuthProvider>
       <Router>
         <Header></Header>
       <Switch>
@@ -35,9 +37,9 @@ function App() {
           <Route path="/inventory">
            <Inventory></Inventory>
           </Route>
-          <Route path="/placeorder">
+          <PrivateRoute path="/placeorder">
            <PlaceOrder></PlaceOrder>
-          </Route>
+          </PrivateRoute>
           <Route path="/login">
            <Login></Login>
           </Route>
@@ -49,6 +51,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
+      </AuthProvider>
     </div>
   );
 }

@@ -8,20 +8,20 @@ const Header = () => {
     const {user, logOut} = useFirebase();
     return (
         <div className="header">
-            <img className="logo" src={logo} alt="" />
-            <nav>
-                <NavLink to="/shop">Shop</NavLink>
-                <NavLink to="/orders">Order Review</NavLink>
-                <NavLink to="/inventory">Manage Inventory</NavLink>
-                {
-                    user.email ?
-                    <button onClick={logOut}>Log Out</button>
+        <img className="logo" src={logo} alt="" />
+        <nav>
+            <NavLink to="/shop">Shop</NavLink>
+            <NavLink to="/orderreview">Order Review</NavLink>
+            <NavLink to="/inventory">Manage Inventory</NavLink>
+            {user.email && <span style={{ color: 'white' }}>Hello {user.displayName} </span>}
+            {
+                user.email ?
+                    <button onClick={logOut}>log out</button>
                     :
-                    <NavLink to="/login">Login</NavLink>
-                }
-            </nav>
-        </div>
-    );
+                    <NavLink to="/login">Login</NavLink>}
+        </nav>
+    </div>
+);
 };
 
 export default Header;

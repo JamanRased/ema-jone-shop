@@ -3,35 +3,45 @@ import { GoogleAuthProvider,getAuth, signInWithPopup, signOut, onAuthStateChange
 import '../../Firebase/firebase.init';
 import initializeFirebase from "../../Firebase/firebase.init";
 
-
 initializeFirebase();
 const useFirebase = ()=>{
-    const [user, setUser] =useState({});
-    const [error, setError] =useState({});
+    const [user, setUser] = useState({});
+    const [loading, setLoading] = useState(true)
 
     const googleProvider = new GoogleAuthProvider();
     const auth = getAuth(); 
 
+
+    //Optional
     const handleGoogleSignIn = () =>{    
-        signInWithPopup(auth, googleProvider)
-        .then((result) => {
-        });
+        return signInWithPopup(auth, googleProvider)
+            .finally(() => { setLoading(false) });
     }
     const logOut = () =>{
+        setLoading(true);
         signOut(auth)
-            .then(()=>{
-
+            .then(() => {
+                setUser({})
             })
+            .finally(() => setLoading(false))
     }
-    useEffect(()=>{
-        onAuthStateChanged(auth,(user) =>{
-            if(user){
-                setUser(user)
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser(user);
             }
+            else {
+                setUser({});
+            }
+            setLoading(false);
         });
+        return () => unsubscribe;
     }, [])
     return {
-        user, handleGoogleSignIn, logOut
+        user,
+        loading,
+        handleGoogleSignIn,
+        logOut
     }
 }
 
