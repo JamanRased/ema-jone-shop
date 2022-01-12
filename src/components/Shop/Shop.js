@@ -8,15 +8,20 @@ import { Link } from 'react-router-dom';
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
+    const [pageCount, setPageCount] = useState(0);
+
     // products to be rendered on the UI
     const [displayProducts, setDisplayProducts] = useState([]);
 
     useEffect(() => {
-        fetch('./products.JSON')
+        fetch('http://localhost:5000/products')
             .then(res => res.json())
             .then(data => {
-                setProducts(data);
-                setDisplayProducts(data);
+                setProducts(data.products);
+                setDisplayProducts(data.products);
+                const count = data.count;
+                const pageNumber = Math.ceil(count/10);
+                setPageCount(pageNumber);
             });
     }, []);
 
